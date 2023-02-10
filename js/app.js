@@ -5,7 +5,7 @@ const state = {
   allProducts: [],
   cart: null,
 };
-
+console.log(state)
 // Cart constructor.
 const Cart = function(items) {
   // this.items is an array of CartItem instances.
@@ -13,12 +13,17 @@ const Cart = function(items) {
 };
 
 Cart.prototype.addItem = function(product, quantity) {
-  // TODO: Fill in this instance method to create a new CartItem and add it to this.items
+  // DONE: Fill in this instance method to create a new CartItem and add it to this.items
+  let newItem = new CartItem(product,quantity);
+  console.log(newItem);
+  this.items.push(newItem);
 };
 
 Cart.prototype.saveToLocalStorage = function() {
-  // TODO: Fill in this instance method to save the contents of the cart to localStorage
-};
+  // DONE: Fill in this instance method to save the contents of the cart to localStorage
+  let stringify = JSON.stringify(state.cart);
+  localStorage.setItem('cartItems',stringify);
+}
 
 Cart.prototype.removeItem = function(item) {
   // TODO: Fill in this instance method to remove one item from the cart.
@@ -26,7 +31,9 @@ Cart.prototype.removeItem = function(item) {
 };
 
 Cart.prototype.updateCounter = function() {
-  // TODO: Update the cart count in the header nav with the number of items in the Cart
+  // DONE: Update the cart count in the header nav with the number of items in the Cart
+  let itemCount = document.getElementById('itemCount');
+  itemCount.textContent = this.items.length;
 }
 
 const CartItem = function(product, quantity) {
